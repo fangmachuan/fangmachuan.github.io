@@ -1,0 +1,1298 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="java单词分享, MC">
+    <meta name="description" content="基础—-进阶
+A. array数组accessible 可存取的  area面积audio 音频   addition  加法  action 行动  arithmetic 算法adjustment 调整  actual 真实的    ar">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>java单词分享 | MC</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">MC</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">MC</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/fangmachuan/fangmachuan.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>github仓库
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/fangmachuan/fangmachuan.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="github仓库" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">java单词分享</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                java基础
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-07-24
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    8.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    30 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>基础—-进阶</p>
+<p>A. array数组accessible 可存取的  area面积audio 音频   addition  加法  action 行动  arithmetic 算法adjustment 调整  actual 真实的    argument 参量ascent 提升  already 已经  AWT(Abstract Window Toolkit)抽象窗口工具  API(Application Programming Interface)应用程序接口 </p>
+<p>B. byte 字节  Boolean 布尔base 基础  buffer缓冲器  button 按钮  break  中断  body 身体 </p>
+<p>C. color 颜色  class 类  count 计数  client 客户  code 代码calculation 计算  cell 单元 circle圆  capital首都  catch捕获 check 检查 container容器  component 组件  command 命令 cube立方,三次方 char(=character)字符  cancel取消 case 情况 choice选择 click单击 center 中心 compile编译  clone克隆，复制  </p>
+<p>D. draw 绘图 data数据 demo 示例 DLL(Dynamic Link Library)动态链接库  document 文档  descent 继承  division 分裂，除法  define定义，说明 display显示 </p>
+<p>E. extends 扩展  executed 执行  event 事件exception  异常  except 除外 employee 雇员environment 环境 east 东方 equal 相等 Echo 重复 </p>
+<p>F. false 假的  float 单精度型  fruit 水果  file 文件  find 发现found 发现  field 域  final 终结的 friend 朋友 fill 填充  focus 焦点font 字体  factorial 阶乘 </p>
+<p>G. graphic 图像 grid 方格  GUI图形化用户接口</p>
+<p>H. host 主机  height 高度 </p>
+<p>I. init(=initialize)初始化  input 输入  implement  实现  instance 实例  io(=input/output)输出输入  interrupted  中断  int(=integer)整型  item元素 interface 接口 inner 内部的 import 导入 index 索引</p>
+<p>J. JDK(Java Development Kit) Java开发工具 JSP(Java Server Page) Java服务页 JVM(Java Virtual Machine) Java虚拟机 </p>
+<p>K. Kit 工具 </p>
+<p>L. language 语言 loop 循环 long 长整型 label 标签 layout 布局 list 列表 listener 收听者 </p>
+<p>M. move 移动 menu 菜单 mode 模式 method 方法 metric 米的，公尺 motion 运动 manager 经理 main 主要的 msg(=message) 消息 </p>
+<p>N. new 新的 number 数字 north 北方 null 空的 native 本地的 </p>
+<p>O. override 过载output 输出 object 对象 out 外部的 oval 椭圆 </p>
+<p>P. public 公共的 protected 保护的 private 私有的 property 属性 point 点 price 价格 problem 问题 package 打包，包裹 print 打印 path 路径 polygon 多边形 program 程序 prompt[prɔmpt] 提示 parse[pɑ:z] 分析 press 按，压 panel 面板 paint 画 </p>
+<p>R. return 返回 runnable 可捕获的 radius[‘reidiəs] 半径 round 环绕 release 释放 rect(=rectangle)长方形 radio[‘reidiəu] 无线电 resolve 解析 </p>
+<p>S. short 短整型 south 南方的 string 字符串 static 静态的 system 系统 seed 种子 seasonal 季节的 set 设置 super 超级 square 平方，二次方 sub 替代的 screen 屏幕 sound声音 state 状态 salary 薪水 sleep 睡觉 size 大小，尺寸 start 开始 sort 排序 status 状态 synchronize 同步发生 switch 开关 stream 流 symbol 符号 </p>
+<p>T. true 真的 title 标题 type 类型 temp(=temporary)暂时的 throw 扔 thread 线程 temperate 温和的，有节制的，temperature  tool 工具 try 试图 </p>
+<p>U. undefined 未定义 UI(User Interface) 用户接口 update 更新 URL(Uniform Resource Locator) 统一资源定位器 </p>
+<p>V. volatile 挥发性 visible 可见的 virtual 虚拟的 variable 变量 value 数值 void 无返回值的 volume 量 viewer 观察者 vector 矢量 </p>
+<p>W. width 宽度 workspace 工作区warrior 勇士 while 当……时 </p>
+<p>Z. zero 零 </p>
+<p>java常用名词解释：<br>AAA  认证<br>(Authentication)：验证用户的身份与可使用的网络服务；授权(Authorization)：依据认证结果开放网络服务给用户；计帐(Accounting)：记录用户对各种网络服务的用量，并提供给计费系统。 简称AAA系统。  </p>
+<p>AWT  Abstract Window Toolkit(抽象窗口工具包)，第一代的 Java GUI工具包，现在基本已经不使用其中的组件，已经被Swing取代，但是Swing是扩展AWT而来。AWT中还包含很多现在GUI编程还在频繁使用的内容，例如事件处理及监听、布局管理器等。AWT也是JFC的一部分。<br>API  Application Programming Interface(应用编程接口)， 语言、框架以及类库对外提供的编码的接口。<br>AOP  Aspect Oriented Programming（面向切面编程），可以通过预编译方式和运行期动态代理实现在不修改源代码的情况下给程序动态统一 添加功能的一种技术。<br>BMP  Bean-Managed Persistent（Bean管理的持久性），EJB中由 Bean自己负责持久性管理的方法，Bean的内容的同步（保存）需要自己编写代码 实现。<br>CALLBACK  CALLBACK首先是基于多线程的,没有线程的调用就不要谈回调.子类调用父类的构造方法叫回调用,那TMD的任何构造对象都叫回调了,因为任何对象至少继承了Object,构造时至少要调用Object的构造方法.<br>CALLBACK机制  一个主线程管理其它线程时,不用轮询方法检查各个线程的状态,而是在子线程中出现某种状态时通知主线程,啊,有人要按下我了,啊,我的值到达100了,(术语叫触发了某种事件)这样主线程收到这些消息再根据消息类型去调用相应的方法.<br>一个例子,我(主线程)坐车去北京,当车到北京时我要调用”下车”这个方法,如果不用回调用机制,我要不断地问driver,到了没有啊?如果我问超过三次而那个driver力气又比我大的话,他肯定要打我,如果用回调用机制,就是用一个子线程(可以让driver承担这个角色)在那运行,当到的时候通知我到了,我就调用”下车()”,而不用过一会就问一次,这样我可以省下时间睡觉或和车上的美眉聊天.<br>CMP  Container-Managed Persistent（容器管理的持久性），EJB 中由容器负责entity beans的持久性管理的方法，即容器负责将 entity beans的更新同步（保存）到数据库。<br>CORBA  Common Object Request Broker Architecture（公用对象请求代理[调度]程序体系结构），是一组用来定义”分布式对象系统”的标准， 由OMG(Object Menagement Group)作为发起和标准制定单位。CORBA的 目的是定义一套协议，符合这个协议的对象可以互相交互，不论它们是用什么样的语言写的，不论它们运行于什么样的机器和操作系统。<br>DTD  Document type Definition(文档类型定义)，它为一个 XML文档或者文档集合建立一套规则。它本身不是独立的技术规范，而是属于规范的一部分，XML文档中的文档类型声明既可以是标记约束，也可以是带有标记约束的外部文档。这两种约束的总和就是DTD。它规定了XML文档的构建方式。<br>DI  Dependency Injection（依赖注入），即组件之间的依赖关系 由容器在运行期决定，形象的来说，即由容器动态的将某种依赖关系注入到组件之中。依赖注入的目标并非为软件系统带来更多的功能，而是为了提升组件重用 的概率，并为系统搭建一个灵活、可扩展的平台。通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务 逻辑，而不用<br>关心具体的资源来自何处、由谁实现。（以上同样摘自夏昕的 Spring开发指南）。DI和IoC是同义词。<br>EJB  Enterprise JavaBeans，Java中用于开发企业级应用的技术标 准，他定义了一个用于开发和发布可重用的服务器端组件的模型，包括 Session beans，Entity beans以及Message-driven beans三种 。<br>Hibernate  Hibernate是一个开放源代码的O/R Mapping (对象关系 映射框架)，它对JDBC进行了轻量级的对象封装，使Java程序员可以随心所欲的使 用对象编程思维来操纵数据库。<br>IDL  Interface Definition Language（接口定义语言）， CORBA的一个关键特性，是一个语言中立的接口定义语言，每个支持CORBA的语言 都会有一个自己的IDL映射。 </p>
+<p>IIOP  Internet Inter-ORB Protocol(互联网内部对象请求代 理协议)，Java中使得程序可以和其他语言的CORBA实现实现互操作性的协议。<br>IoC Inversion of Control（控制反转），由容器控制程序 之间的关系，而非传统实现中，由程序代码直接操控，控制权由应用代码中转到 了外部容器，控制权的转移，是所谓反转。（以上摘自夏昕的Spring开发指南）<br>I18N  internationalization（国际化），这个单词的长度是20，然后取 其首尾字母，中间省略的字母刚好18个。<br>JCA  Java Cryptography Architecture，Java加密架构， java平台中用于访问和开发加密功能的框架。<br>JTS  Java Transaction Service（Java事务服务），Java中 进行分布式事务管理的技术标准，它是基于CORBA对象事务服务（CORBA Object Transaction Service）的。 使得EJB和它的客户端能够进行事务操作；可以对应用程序中的若干个Bean进行更新，并保证所有的更改在事务的最后能够提交或者回滚；依赖JDBC-2驱动程序来支持XA协 议进而支持通过一个或多个资源管理者执行分布式事务处理的能力<br>JNDI  Java Naming and Directory Interface （Java命名和目录服务接口），Java中使用目录和命名服务的技术规范，和JDBC 类似，他由API和SPI构成。J2EE的目录服务使得Java客户端和Web层 Servlet 能够查询用户定义的对象，比如说，EJB和环境配置项（比如JDBC 驱动程序的地址）<br>JMS  Java Messaging Service（Java消息服务），使用基于 点到点（一对一）或者发布订阅（多对多）的交互方式来支持J2EE应用程序之间 的异步通讯；所有消息可被设定为具有与其关联的服务的特性，从最佳效果服务 特性到事务性服务特性<br>JCP  Java Community Process（Java社区过程），负责Java 技术发展与审核技术规格的开放组织，JCP对提出的请求投票表决，JCP的专家组 成员一般都是业界比较有影响力的企业或者组织。<br>JNode  JNode 是个特殊的 JVM，可以在没有其他 OS 的?机上运行 Java 程序。<br>可惜刚刚成形，不能实 用。 相关网站：<br><a href="http://jnode.sourcefor" target="_blank" rel="noopener">http://jnode.sourcefor</a> ge.net/portal/ ;<br>JTA  Java Transaction API（Java事务API），Java中进行事 务划分的技术。<br>JSF  Java Server Faces，新一代的Java Web应用技术 标准，吸收了很多Servlet、JSP以及其他的Web应用框架的特性。JSF为Web应用开 发定义了一个事件驱动的、基于组件的模型。<br>JNI  java本地编程接口。是 Java Native Interface 的英文缩写。他能够<br>使java 代码与用其他编程语言编写的应用程序和库进行互操作。（其他编程语言大多是 c,c++和汇编语言。）<br>JDBC  Java DataBase Connectivity（Java数据库连接），用 于访问关系型数据库的Java技术，仅仅是一种技术标准，访问不同的关系型数据 库需要相应的JDBC规范的实现包。<br>JSP  Java Server Pages（Java服务器端页面），J2EE标准中 用于创建动态页面内容的技术标准，基于Servlet技术，需要支持该标准的服务器 才能运行，最常用的JSP服务器之一就是Tomcat。<br>JFC  Java Foundation Classes（JAVA基础类），集合了GUI 组件以及其他能简化开发和展开桌面和Internet/Intranet应用的服务，其核心就 是Swing。<br>JVM  Java Virtual Machine（Java虚拟机），它是一个虚构 出来的计算机,是通过在实际的计算机上仿真模拟各种计算机功能来实现的，。 Java虚拟机有自己完善的硬件架构,如处理器、堆栈、寄存器等,还具有相应的指令系统。JVM屏蔽了与具体操作系统平台相关的信息,使得Java程序只需生成在 Java虚拟机上运行的目标代码(字节码),就可以在多种平台上不加修改地运行。 Java虚拟机在执行字节码时,实际上最终还是把字节码解释成具体平台上的机器指 令执行。<br>JRE  Java Runtime Environment（Java运行环境），运行 JAVA程序所必须的环境的集合，包含JVM标准实现及Java核心类库。<br>JSDK  Java Software Development Kit，和JDK以及J2SE 等同。<br>JDK  Java Development Kit(Java开发工具包):包括运行环境 、编译工具及其它工具、源代码等，基本上和J2SE等同。<br>J2ME  Java 2 Micro Edition（JAVA2精简版）API规格基 于J2SE ，但是被修改为可以适合某种产品的单一要求。J2ME使JAVA程序可以很方便的应用于电话卡、寻呼机等小型设备，它包括两种类型的组件，即配置 （configuration）和描述（profile）。 </p>
+<p>J2EE  Java 2 Enterprise Edition（JAVA2企业版），使用Java进行企业开发的一套扩展标准，必须基于J2SE，提供一个基于组件设计、 开发、集合、展开企业应用的途径。J2EE 平台提供了多层、分布式的应用 模型，重新利用组件的能力，统一安全的模式以及灵活的处理控制能力。J2EE包 括 EJB, JTA, JDBC, JCA, JMX, JNDI, JMS, ;JavaMail, Servlet, JSP等规范。 </p>
+<p>J2SE  Java 2 Standard Edition（JAVA2标准版），用来 开发Java程序的基础，包括编译器、小工具、运行环境，SUN发布的标准版本中还 包括核心类库的所有源代码。 </p>
+<p>L10N  localization（本地化），和I18N类似，取首尾字母，中间省略10 个字母。<br>MVC  Model View Controller的缩写，为了获得更好的系统结 构而推出的一种宏观的设计模式，model代表系统的模型层，view是模型的展现层 ，controller负责业务的流转，使用MVC可以使得系统的层次清晰，降低各个部分 的耦合。<br>PI  Processing Instruction(处理指令)，XML中指示应用程序执 行一些特定的任务。其格式是 ，它只 能是解析器可以识别的XML标准处理指令集中一部分。有时它也被应用程序用来传 达信息，这些信息可用来帮助进行解析，在这种情况下，应用程序中要有可以作 为处理指令执行对象的关键字。<br>PO  persisent object 持久对象<br>POJO（Plain Old Java Objects）简单的Java对象，实际就是普通JavaBeans，是为了避免和EJB混淆所创造的简称。<br>RADIUS  Remote Authentication Dial In User Service<br>广泛应用于宽带窄带认证系统的协议，前端一般为PPPoE或者802.1x。<br>RMI  Remote Method Invocation(远程方法调用)，Java中进行分布式编程的基础技术，EJB技术也是基于RMI的。 RMI让你能够通过自己机子上的对象运用方式，使用其它机子上的对象。<br>RTTI  run-time type identification,执行期类型识别。当你有一个指向基类的reference时，RTTI机制让你得以找出它所指向的对象以及类的相关信息。（JAVA提供的另一个方法就是reflection[反射/映射]机制）<br>SERIALIZATION 序列化。是一切对象深度CLONE,对象的存储与恢复,对象的远程调用的基础,也就是说它是对象池化管理,分布式引用的基础,想想J2EE平台如果不靠它能做什么?<br>这个机制让我们得以实现轻量级持久机制<br>SWT  SWT 本身仅仅是Eclipse组织为了开发 Eclipse IDE环境所编写的一组底层图形界面 API。至今为止，SWT无论是在性能和外观上，都超越了SUN公司提供的AWT和SWING。目前 Eclipse IDE已经开发到了2.1版本，SWT已经十分稳定<br><a href="http://www.javaresearch.org/article/showarticl" target="_blank" rel="noopener">http://www.javaresearch.org/article/showarticl</a> e.jsp?column=287&amp;thread=24407<br>SOA  Service-Oriented Architecture，面向服务架构，SOA是一种 架构模型，它可以根据需求通过网络对松散耦合的粗粒度应用组件进行分布式部署、组合和使用。服务层是SOA的基础，可以直接被应用调用，从而有效控制系统中与软件代理交互的人为依赖性。SOA的几个关键特性：一种粗粒度、松耦合服务架构，服务之间通过简单、精确定义接口进行通讯，不涉及底层编程接口和通讯 模型。<br>SPI  Service Provider Interface（服务提供商接口），满 足某种服务标准的供应商提供的符合该标准的应用程序接口，SPI应该和该服务的 API标准是兼容的，应用程序一般应该是基于API编写，除非是SPI中包含API中没 有提供的功能而又必须使用。<br>SableVM  SableVM是用C语言写的非常简便的JAVA 虚拟机网站<br>详细地址：<a href="http://sablevm.org/" target="_blank" rel="noopener">http://sablevm.org/</a><br>WFC  Windows Foundation Classes for Ja va 的英文缩写，他提供了<br>Java 软件包的架构，他支持面向 Windows 操作系统和Dynamic HTML<br>对象模型的组件。<br>WORA  Write Once, Run Anywhere（一次编写，到处运行 ），Java的宣传口号，在一定程度上可以达到，对于复杂应用在不同平台上可能 需要进行调试。<br>XML  Extentsible Markup Language（可扩展标记语言）的缩 写，是用来定义其它语言的一种元语言，其前身是SGML(标准通用标记语言)。它没有标签集（tag set），也没有语法规则（grammatical rule），但 是它有句法规则（syntax rule）。任何XML文档对任何类型的应用以及正确 的解析都必须是良构的（well-formed），即每一个打开的标签都必须有匹配的结束标签，不得含有次序颠倒的标签，并且在语句构成上应符合技术规范的要求。 XML文档可以是有效的（valid），但并非一定要求有效。所谓有效文档是指其符合其文档类型定义（DTD）的文档。如果一个文档符合一个模式（schema）的规定 ，那么这个文档是”模式有效的（schema valid）”。<br>XSL  Extensible Stylesheet Language(可扩展样式表语言)，它能够改变及转换一种XML格式的数据为另一种XML格式。它提供一个已定义好的样式表，通过这个结构可以完成不同格式的转换。为了避免因为一个不同的表示方式就要不得不改动数据，XSL使数据或文档内容与表示形式相透明。它所采用的方法可以与用java写一个将数据转换成其它格式的小程序相提并论，而且还提供一个标准接口。<br>单元测试  单元测试测的是独立的一个工作单元。在Java应用程序中，”独立的一个工作单元”常常指的是一个方法（但并不总是如此）。作为对比，集成测试和接收测试则检查多个组件如何交互。一个工作单元是一项任务，它不依赖于其他任何任务的完成。(摘自《JUnit in action中文版》)<br>反射(也可以叫映射) 是RUNTIME 的事,完成类的加载,类的分析,bean的自省等功能,JBUILDER为什么敲一个类的名称后面就列出了它的成员变量和方法供你选择?如果你想知道一个对象的某种方法被调用过多少次你用什么方法?这些知识可以让你从一行Exception就能分析出错误原因.以及自己实现classloader,安全管理等方面的工作.<br>框架  框架是一个应用程序的半成品。框架提供了可在应用程序之间共享的可复用的公共结构。开发者把框架融入他们自己的应用程序，并加以扩展，以满足他们特定的需要。框架和工具包的不同之处在于，框架提供了一致的结构，而不仅仅是一组工具类。(摘自《JUnit in action中文版》)<br>持久性  指的是某个对象的生命周期不取决于程序的执行与否。<br>名字空间  namespace 就是一个元素前缀与URI（统一资源标识符）之间的一种映射关系，这个映射可以用来处理名字空间冲突，定义可以允许解析器处理冲突的数据结构。XML名字空间推荐标准定义了规范这些名字的机制，这种机制依靠URI来完成任务，详细情况后面有叙述。名字空间是用一个XML元素加一个前缀组成的，比如<a href="html:table">html:table</a>和<a href="form:table">form:table</a>，这样XML解析器就可以在不使用完全不同的元素名字的情况下区分上述两个元素的名字。它经常在XML文档中使用，也可以在模式以及XSL样式表或者xml有关的规范中使用。<br>  开放封闭法则  软件实体应该是可扩展的，但是不可修改的(Software Entities Should Be Open For Extension, Yet Closed For Modification)，简称OCP，这个法则是OO中最重要的一条法则，其含义是我们应该能够不用修改软件实体的源代码，就能更改软件实体的行为，符合该法则便意味着最高等级的复用性（reusability）和可维护性（maintainability）。 </p>
+<p>计算机常用英语汇总：<br>CPU(Center Processor Unit)中央处理单元<br>mainboard主板<br>RAM(random access memory)随机存储器(内存)<br>ROM(Read Only Memory)只读存储器<br>Floppy Disk软盘<br>Hard Disk硬盘<br>CD-ROM光盘驱动器(光驱)<br>monitor监视器<br>keyboard键盘<br>mouse鼠标<br>chip芯片<br>CD-R光盘刻录机<br>HUB集线器<br>Modem= MOdulator-DEModulator,调制解调器<br>P-P(Plug and Play)即插即用<br>UPS(Uninterruptable Power Supply)不间断电源<br>BIOS(Basic-input-Output System)基本输入输出系统<br>CMOS(Complementary Metal-Oxide-Semiconductor)互补金属氧化物半导体<br>setup安装<br>uninstall卸载<br>wizzard向导<br>OS(Operation Systrem)操作系统<br>OA(Office AutoMation)办公自动化<br>exit退出<br>edit编辑<br>copy复制<br>cut剪切<br>paste粘贴<br>delete删除<br>select选择<br>find查找<br>select all全选<br>replace替换<br>undo撤消<br>redo重做<br>program程序<br>license许可(证)<br>back前一步<br>next下一步<br>finish结束<br>folder文件夹<br>Destination Folder目的文件夹<br>user用户<br>click点击<br>double click双击<br>right click右击<br>settings设置<br>update更新<br>release发布<br>data数据<br>data base数据库<br>DBMS(Data Base Manege System)数据库管理系统<br>view视图<br>insert插入<br>object对象<br>configuration配置<br>command命令<br>document文档<br>POST(power-on-self-test)电源自检程序<br>cursor光标<br>attribute属性<br>icon图标<br>service pack服务补丁<br>option pack功能补丁<br>Demo演示<br>short cut快捷方式<br>exception异常<br>debug调试<br>previous前一个<br>column行<br>row列<br>restart重新启动<br>text文本<br>font字体<br>size大小<br>scale比例<br>interface界面<br>function函数<br>access访问<br>manual指南<br>active激活<br>computer language计算机语言<br>menu菜单<br>GUI(graphical user interfaces )图形用户界面<br>template模版<br>page setup页面设置<br>password口令<br>code密码<br>print preview打印预览<br>zoom in放大<br>zoom out缩小<br>pan漫游<br>cruise漫游<br>full screen全屏<br>tool bar工具条<br>status bar状态条<br>ruler标尺<br>table表<br>paragraph段落<br>symbol符号<br>style风格<br>execute执行<br>graphics图形<br>image图像<br>Unix用于服务器的一种操作系统<br>Mac OS苹果公司开发的操作系统<br>OO(Object-Oriented)面向对象<br>virus病毒<br>file文件<br>open打开<br>colse关闭<br>new新建<br>save保存<br>exit退出<br>clear清除<br>default默认<br>LAN局域网<br>WAN广域网<br>Client/Server客户机/服务器<br>ATM( Asynchronous Transfer Mode)异步传输模式<br>Windows NT微软公司的网络操作系统<br>Internet互联网<br>WWW(World Wide Web)万维网<br>protocol协议<br>HTTP超文本传输协议<br>FTP文件传输协议<br>Browser浏览器<br>homepage主页<br>Webpage网页<br>website网站<br>URL在Internet的WWW服务程序上 用于指定信息位置的表示方法<br>Online在线<br>Email电子邮件<br>ICQ网上寻呼<br>Firewall防火墙<br>Gateway网关<br>HTML超文本标识语言<br>hypertext超文本<br>hyperlink超级链接<br>IP(Address)互联网协议(地址)<br>SearchEngine搜索引擎<br>TCP/IP用于网络的一组通讯协议<br>Telnet远程登录<br>IE(Internet Explorer)探索者(微软公司的网络浏览器)<br>Navigator引航者(网景公司的浏览器)<br>multimedia多媒体<br>ISO国际标准化组织<br>ANSI美国国家标准协会<br>able 能<br>activefile 活动文件<br>addwatch 添加监视点<br>allfiles 所有文件<br>allrightsreserved 所有的权力保留<br>altdirlst 切换目录格式<br>andfixamuchwiderrangeofdiskproblems 并能够解决更大范围内的磁盘问题<br>andotherinformation 以及其它的信息<br>archivefileattribute 归档文件属性<br>assignto 指定到<br>autoanswer 自动应答<br>autodetect 自动检测<br>autoindent 自动缩进<br>autosave 自动存储<br>availableonvolume 该盘剩余空间<br>badcommand 命令错<br>badcommandorfilename 命令或文件名错<br>batchparameters 批处理参数<br>binaryfile 二进制文件<br>binaryfiles 二进制文件<br>borlandinternational borland国际公司<br>bottommargin 页下空白<br>bydate 按曰期<br>byextension 按扩展名<br>byname 按名称<br>bytesfree 字节空闲<br>callstack 调用栈<br>casesensitive 区分大小写<br>causespromptingtoconfirmyouwanttooverwritean 要求出现确认提示,在你想覆盖一个<br>centralpointsoftwareinc central point 软件股份公司<br>changedirectory 更换目录<br>changedrive 改变驱动器<br>changename 更改名称<br>characterset 字符集<br>checkingfor 正在检查<br>checksadiskanddisplaysastatusreport 检查磁盘并显示一个状态报告<br>chgdrivepath 改变盘/路径<br>china 中国<br>chooseoneofthefollowing 从下列中选一项<br>clearall 全部清除<br>clearallbreakpoints 清除所有断点<br>clearsanattribute 清除属性<br>clearscommandhistory 清除命令历史<br>clearscreen 清除屏幕<br>closeall 关闭所有文件<br>codegeneration 代码生成<br>colorpalette 彩色调色板<br>commandline 命令行<br>commandprompt 命令提示符<br>compressedfile 压缩文件<br>configuresaharddiskforusewithmsdos 配置硬盘,以为 MS-DOS 所用<br>conventionalmemory 常规内存<br>copiesdirectoriesandsubdirectoriesexceptemptyones 拷贝目录和子目录,空的除外<br>copiesfileswiththearchiveattributeset 拷贝设置了归档属性的文件<br>copiesoneormorefilestoanotherlocation 把文件拷贝或搬移至另一地方<br>copiesthecontentsofonefloppydisktoanother 把一个软盘的内容拷贝到另一个软盘上<br>copydiskette 复制磁盘<br>copymovecompfindrenamedeletevervieweditattribwordpprintlist C拷贝M移动 O比 F搜索R改名 D删除 V版本 E浏览A属性 W写字 P打印 L列表<br>copyrightc 版权<br>(c createdospartitionorlogicaldosdrive 创建DOS分区或逻辑DOS驱动器<br>createextendeddospartition 创建扩展DOS分区<br>createlogicaldosdrivesintheextendeddospartition 在扩展DOS分区中创建逻辑DOS驱动器<br>createprimarydospartition 创建DOS主分区<br>createsadirectory 创建一个目录<br>createschangesordeletesthevolumelabelofadisk 创建,改变或删除磁盘的卷标<br>currentfile 当前文件<br>currentfixeddiskdrive 当前硬盘驱动器<br>currentsettings 当前设置<br>currenttime 当前时间<br>cursorposition 光标位置<br>defrag 整理碎片<br>dele 删去<br>deletepartitionorlogicaldosdrive 删除分区或逻辑DOS驱动器<br>deletesadirectoryandallthesubdirectoriesandfilesinit 删除一个目录和所有的子目录及其中的所有文件<br>deltree 删除树<br>devicedriver 设备驱动程序<br>dialogbox 对话栏<br>directionkeys 方向键<br>directly 直接地<br>directorylistargument 目录显示变量<br>directoryof 目录清单<br>directorystructure 目录结构<br>diskaccess 磁盘存取<br>diskcopy 磁盘拷贝<br>diskservicescopycomparefindrenameverifyvieweditmaplocateinitialize 磁盘服务功能: C拷贝 O比较 F搜索R改卷名V校验 浏览E编缉M图 L找文件 N格式化<br>diskspace 磁盘空间<br>displayfile 显示文件<br>displayoptions 显示选项<br>displaypartitioninformation 显示分区信息<br>displaysfilesinspecifieddirectoryandallsubdirectories 显示指定目录和所有目录下的文件<br>displaysfileswithspecifiedattributes 显示指定属性的文件<br>displaysorchangesfileattributes 显示或改变文件属性<br>displaysorsetsthedate 显示或设备曰期<br>displayssetupscreensinmonochromeinsteadofcolor 以单色而非彩色显示安装屏信息<br>displaystheamountofusedandfreememoryinyoursystem 显示系统中已用和未用的内存数量<br>displaysthefullpathandnameofeveryfileonthedisk 显示磁盘上所有文件的完整路径和名称<br>displaysthenameoforchangesthecurrentdirectory 显示或改变当前目录<br>doctor 医生<br>doesn 不<br>doesntchangetheattribute 不要改变属性<br>dosshell DOS 外壳<br>doubleclick 双击<br>doyouwanttodisplaythelogicaldriveinformationyn 你想显示逻辑驱动器信息吗(y/n)?<br>driveletter 驱动器名<br>editmenu 编辑选单<br>emsmemory ems内存<br>endoffile 文件尾<br>endofline 行尾<br>enterchoice 输入选择<br>entiredisk 转换磁盘<br>environmentvariable 环境变量<br>esc esc everyfileandsubdirectory 所有的文件和子目录<br>existingdestinationfile 已存在的目录文件时<br>expandedmemory 扩充内存<br>expandtabs 扩充标签<br>explicitly 明确地<br>extendedmemory 扩展内存<br>fastest 最快的<br>fatfilesystem fat 文件系统<br>fdiskoptions fdisk选项<br>fileattributes 文件属性<br>fileformat 文件格式<br>filefunctions 文件功能<br>fileselection 文件选择<br>fileselectionargument 文件选择变元<br>filesin 文件在<br>filesinsubdir 子目录中文件<br>fileslisted 列出文件<br>filespec 文件说明<br>filespecification 文件标识<br>filesselected 选中文件<br>findfile 文件查寻<br>fixeddisk 硬盘<br>fixeddisksetupprogram 硬盘安装程序<br>fixeserrorsonthedisk 解决磁盘错误<br>floppydisk 软盘<br>formatdiskette 格式化磁盘<br>formatsadiskforusewithmsdos 格式化用于MS-DOS的磁盘<br>formfeed 进纸<br>freememory 闲置内存<br>fullscreen 全屏幕<br>functionprocedure 函数过程<br>graphical 图解的<br>graphicslibrary 图形库<br>groupdirectoriesfirst 先显示目录组<br>hangup 挂断<br>harddisk 硬盘<br>hardwaredetection 硬件检测<br>hasbeen 已经<br>helpfile 帮助文件<br>helpindex 帮助索引<br>helpinformation 帮助信息<br>helppath 帮助路径<br>helpscreen 帮助屏<br>helptext 帮助说明<br>helptopics 帮助主题<br>helpwindow 帮助窗口<br>hiddenfile 隐含文件<br>hiddenfileattribute 隐含文件属性<br>hiddenfiles 隐含文件<br>howto 操作方式<br>ignorecase 忽略大小写<br>inbothconventionalanduppermemory 在常规和上位内存<br>incorrectdos 不正确的DOS<br>incorrectdosversion DOS 版本不正确<br>indicatesabinaryfile 表示是一个二进制文件<br>indicatesanasciitextfile 表示是一个ascii文本文件<br>insertmode 插入方式<br>insteadofusingchkdsktryusingscandisk 请用scandisk,不要用chkdsk<br>inuse 在使用<br>invaliddirectory 无效的目录<br>is 是<br>kbytes 千字节<br>keyboardtype 键盘类型<br>labeldisk 标注磁盘<br>laptop 膝上<br>largestexecutableprogram 最大可执行程序<br>largestmemoryblockavailable 最大内存块可用<br>lefthanded 左手习惯<br>leftmargin 左边界<br>linenumber 行号<br>linenumbers 行号<br>linespacing 行间距<br>listbyfilesinsortedorder 按指定顺序显示文件<br>listfile 列表文件<br>listof 清单<br>locatefile 文件定位<br>lookat 查看<br>lookup 查找<br>macroname 宏名字<br>makedirectory 创建目录<br>memoryinfo 内存信息<br>memorymodel 内存模式<br>menubar 菜单条<br>menucommand 菜单命令<br>menus 菜单<br>messagewindow 信息窗口<br>microsoft 微软 </p>
+<p>microsoftantivirus 微软反病毒软件 </p>
+<p>microsoftcorporation 微软公司 </p>
+<p>mini 小的 </p>
+<p>modemsetup 调制解调器安装 </p>
+<p>modulename 模块名 </p>
+<p>monitormode 监控状态 </p>
+<p>monochromemonitor 单色监视器 </p>
+<p>moveto 移至 </p>
+<p>multi 多 </p>
+<p>newdata 新建数据 </p>
+<p>newer 更新的 </p>
+<p>newfile 新文件 </p>
+<p>newname 新名称 </p>
+<p>newwindow 新建窗口 </p>
+<p>norton norton nostack 栈未定义 </p>
+<p>noteusedeltreecautiously 注意:小心使用deltree </p>
+<p>onlinehelp 联机求助 </p>
+<p>optionally 可选择地 </p>
+<p>or 或 </p>
+<p>pageframe 页面 </p>
+<p>pagelength 页长</p>
+<p>pausesaftereachscreenfulofinformation 在显示每屏信息后暂停一下 </p>
+<p>pctools pc工具 </p>
+<p>postscript 附言 </p>
+<p>prefixtoreverseorder 反向显示的前缀 </p>
+<p>presetswitchesbyprefixinganyswitchwithhyphenforexamplew 用前缀和放在短横线-后的开关(例如/-w)预置开关 </p>
+<p>pressakeytoresume 按一键继续 </p>
+<p>pressanykeyforfilefunctions 敲任意键执行文件功能 </p>
+<p>pressentertokeepthesamedate 敲回车以保持相同的曰期 </p>
+<p>pressentertokeepthesametime 敲回车以保持相同的时间 </p>
+<p>pressesctocontinue 敲esc继续 </p>
+<p>pressesctoexit 敲键退出 </p>
+<p>pressesctoexitfdisk 敲esc退出fdisk </p>
+<p>pressesctoreturntofdiskoptions 敲esc返回fdisk选项 </p>
+<p>previously 在以前 </p>
+<p>printall 全部打印 </p>
+<p>printdevice 打印设备 </p>
+<p>printerport 打印机端口 </p>
+<p>processesfilesinalldirectoriesinthespecifiedpath 在指定的路径下处理所有目录下的文件 </p>
+<p>programfile 程序文件 </p>
+<p>programmingenvironment 程序设计环境 </p>
+<p>promptsyoubeforecreatingeachdestinationfile 在创建每个目标文件时提醒你 </p>
+<p>promptsyoutopressakeybeforecopying 在拷贝前提示你敲一下键<br>pulldown 下拉 </p>
+<p>pulldownmenus 下拉式选单 </p>
+<p>quickformat 快速格式化 </p>
+<p>quickview 快速查看 </p>
+<p>readonlyfile 只读文件 </p>
+<p>readonlyfileattribute 只读文件属性 </p>
+<p>readonlyfiles 只读文件 </p>
+<p>readonlymode 只读方式 </p>
+<p>redial 重拨 </p>
+<p>repeatlastfind 重复上次查找 </p>
+<p>reportfile 报表文件 </p>
+<p>resize 调整大小 </p>
+<p>respectively 分别地 </p>
+<p>rightmargin 右边距 </p>
+<p>rootdirectory 根目录 </p>
+<p>runsdebugaprogramtestingandeditingtool 运行debug, 它是一个测试和编辑工具 runtimeerror 运行时出错 </p>
+<p>saveall 全部保存 </p>
+<p>saveas 另存为 </p>
+<p>scandisk 磁盘扫描程序 </p>
+<p>scandiskcanreliablydetect scandisk可以可靠地发现 </p>
+<p>screencolors 屏幕色彩 </p>
+<p>screenoptions 屏幕任选项 </p>
+<p>screensaver 屏幕暂存器 </p>
+<p>screensavers 屏幕保护程序 </p>
+<p>screensize 屏幕大小 </p>
+<p>scrollbars 翻卷栏 </p>
+<p>scrolllockoff 滚屏已锁定 </p>
+<p>searchfor 搜索 </p>
+<p>sectorspertrack 每道扇区数 </p>
+<p>selectgroup 选定组 </p>
+<p>selectionbar 选择栏 </p>
+<p>setactivepartition 设置活动分区 </p>
+<p>setupoptions 安装选项 </p>
+<p>shortcutkeys 快捷键 </p>
+<p>showclipboard 显示剪贴板 </p>
+<p>singleside 单面 </p>
+<p>sizemove 大小/移动 </p>
+<p>sorthelp S排序H帮助 </p>
+<p>sortorder 顺序 </p>
+<p>specialservicesdirectorymaint 特殊服务功能: D目录维护<br>specifiesdrivedirectoryandorfilestolist 指定要列出的驱动器,目录,和文件 </p>
+<p>specifiesthatyouwanttochangetotheparentdirectory 指定你想把父目录作为当前目录 </p>
+<p>specifiesthedirectoryandorfilenameforthenewfile 指定新文件的目录或文件名 </p>
+<p>specifiesthefileorfilestobecopied 指定要拷贝的文件 </p>
+<p>stackoverflow 栈溢出 </p>
+<p>standalone 独立的 </p>
+<p>startupoptions 启动选项 </p>
+<p>statusline 状态行 </p>
+<p>stepover 单步 </p>
+<p>summaryof 摘要信息 </p>
+<p>suppressespromptingtoconfirmyouwanttooverwritean 取消确认<br>提示,在你想覆盖一个 swapfile 交换文件</p>
+<p>switchesmaybepresetinthedircmdenvironmentvariable 开关可在<br>dircmd环境变量中设置 </p>
+<p>switchto 切换到 </p>
+<p>sync 同步 </p>
+<p>systemfile 系统文件 </p>
+<p>systemfiles 系统文件 </p>
+<p>systeminfo 系统信息 </p>
+<p>systeminformation 系统信息程序 </p>
+<p>tableofcontents 目录 </p>
+<p>terminalemulation 终端仿真 </p>
+<p>terminalsettings 终端设置 </p>
+<p>testfile 测试文件 </p>
+<p>testfileparameters 测试文件参数 </p>
+<p>theactivewindow 激活窗口 </p>
+<p>theswitchymaybepresetinthecopycmdenvironmentvariable /y开关可以在copycmd环境变量中预置 </p>
+<p>thetwofloppydisksmustbethesametype 两个软磁盘必须是同种类型的 </p>
+<p>thismaybeoverriddenwithyonthecommandline 在命令行输入/-y可以使之无效 </p>
+<p>togglebreakpoint 切换断点 </p>
+<p>tomsdos 转到MS-DOS </p>
+<p>topmargin 页面顶栏 </p>
+<p>turnoff 关闭 </p>
+<p>typecddrivetodisplaythecurrentdirectoryinthespecifieddrive 键入cd驱动器:显示指定驱动器的当前目录 </p>
+<p>typecdwithoutparameterstodisplaythecurrentdriveanddirectory 键入无参数的cd以显示当前驱动器的当前目录 </p>
+<p>typedatewithoutparameterstodisplaythecurrentdatesettingand 键入无参数的date,显示当前曰期设置和 </p>
+<p>unmark 取消标记 </p>
+<p>unselect 取消选择 </p>
+<p>usesbareformat 使用简洁方式 </p>
+<p>useslowercase 使用小写 </p>
+<p>useswidelistformat 使用宽行显示</p>
+<p>usinghelp 使用帮助 </p>
+<p>verbosely 冗长地 </p>
+<p>verifiesthatnewfilesarewrittencorrectly 校验新文件是否正确写入了 </p>
+<p>videomode 显示方式 </p>
+<p>viewwindow 内容浏览 </p>
+<p>viruses 病毒 </p>
+<p>vision 景象 </p>
+<p>vollabel 卷标 </p>
+<p>volumelabel 卷标 </p>
+<p>volumeserialnumberis 卷序号是 </p>
+<p>windowshelp windows 帮助 </p>
+<p>wordwrap 整字换行 </p>
+<p>workingdirectory 正在工作的目录 </p>
+<p>worm 蠕虫 </p>
+<p>writemode 写方式 </p>
+<p>writeto 写到 </p>
+<p>xmsmemory 扩充内存 </p>
+<p>youmay 你可以</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://machuan.gitee.io" rel="external nofollow noreferrer">machuan</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://machuan.gitee.io/2020/07/24/java%E5%8D%95%E8%AF%8D%E5%88%86%E4%BA%AB/">https://machuan.gitee.io/2020/07/24/java%E5%8D%95%E8%AF%8D%E5%88%86%E4%BA%AB/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://machuan.gitee.io" target="_blank">machuan</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/07/25/MyBatis%E7%AE%80%E4%BB%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="MyBatis简介">
+                        
+                        <span class="card-title">MyBatis简介</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MyBatis简介环境说明：jdk 8 +
+MySQL 8.0
+maven-3.6.3
+IDEA
+学习前需要掌握：JDBC
+MySQL
+Java 基础
+Maven
+Junit
+什么是MyBatisMyBatis 是一款优秀的持久层框架
+My
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Mybatis/" class="post-category">
+                                    Mybatis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/07/23/spring%E6%95%B4%E5%90%88MyBatis/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="spring整合MyBatis">
+                        
+                        <span class="card-title">spring整合MyBatis</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            步骤1、导入相关jar包
+junitxml   junit   junit   4.12
+mybatis
+```xml
+&lt;dependency&gt;
+   &lt;groupId&gt;org.mybatis&lt;/groupId
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://machuan.gitee.io" target="_blank">machuan</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">220.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "6";
+                    var startDate = "1";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="fangmachuan.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2840334251@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2840334251" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2840334251" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

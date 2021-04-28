@@ -1,0 +1,1606 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Redis五大数据类型, MC">
+    <meta name="description" content="五大数据类型Redis是一个开源（BSD许可），内存存储的数据结构服务器，可用作数据库，高速缓存和消息队列代理。它支持字符串、哈希表、列表、集合、有序集合，位图，hyperloglogs等数据类型。内置复制、Lua脚本、LRU收回、事务以及">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Redis五大数据类型 | MC</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">MC</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">MC</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/fangmachuan/fangmachuan.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>github仓库
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/fangmachuan/fangmachuan.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="github仓库" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Redis五大数据类型</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-10-22
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="五大数据类型"><a href="#五大数据类型" class="headerlink" title="五大数据类型"></a>五大数据类型</h4><p>Redis是一个开源（BSD许可），内存存储的数据结构服务器，可用作数据库，高速缓存和消息队列代理。它支持字符串、哈希表、列表、集合、有序集合，位图，hyperloglogs等数据类型。内置复制、Lua脚本、LRU收回、事务以及不同级别磁盘持久化功能，同时通过Redis Sentinel提供高可用，通过Redis Cluster提供自动分区。</p>
+<h5 id="Redis-key"><a href="#Redis-key" class="headerlink" title="Redis-key"></a>Redis-key</h5><p>在redis中无论什么数据类型，在数据库中都是以key-value形式保存，通过进行对Redis-key的操作，来完成对数据库中数据的操作。</p>
+<p>下面学习的命令：</p>
+<ul>
+<li>exists key：判断键是否存在</li>
+<li>del key：删除键值对</li>
+<li>move key db：将键值对移动到指定数据库</li>
+<li>expire key second：设置键值对的过期时间</li>
+<li>type key：查看value的数据类型</li>
+</ul>
+<p><img src="/images/pasted-417.png" alt="upload successful"><br>关于TTL命令</p>
+<p>Redis的key，通过TTL命令返回key的过期时间，一般来说有3种：</p>
+<ul>
+<li>-当前key没有设置过期时间，所以会返回-1.</li>
+<li>当前key有设置过期时间，而且key已经过期，所以会返回-2.</li>
+<li>当前key有设置过期时间，且key还没有过期，故会返回key的正常剩余时间.</li>
+</ul>
+<p>关于重命名RENAME和RENAMENX</p>
+<ul>
+<li>RENAME key newkey修改 key 的名称</li>
+<li>RENAMENX key newkey仅当 newkey 不存在时，将 key 改名为 newkey 。</li>
+</ul>
+<p>更多命令学习：<a href="https://www.redis.net.cn/order/" target="_blank" rel="noopener">https://www.redis.net.cn/order/</a></p>
+<h5 id="String字符串"><a href="#String字符串" class="headerlink" title="String字符串"></a>String字符串</h5><p><img src="/images/pasted-418.png" alt="upload successful"></p>
+<p>String类似的使用场景：value除了是字符串还可以是数字，用途举例：</p>
+<ul>
+<li>计数器</li>
+<li>统计多单位的数量：uid:123666：follow 0</li>
+<li>粉丝数</li>
+<li>对象存储缓存<h5 id="List列表"><a href="#List列表" class="headerlink" title="List列表"></a>List列表</h5></li>
+</ul>
+<p>Redis列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+<p>一个列表最多可以包含 232 - 1 个元素 (4294967295, 每个列表超过40亿个元素)。</p>
+<p>首先我们列表，可以经过规则定义将其变为队列、栈、双端队列等</p>
+<p><img src="/images/pasted-419.png" alt="upload successful"></p>
+<p>如图Redis中List是可以进行双端操作的，所以命令也就分为了LXXX和RLLL两类，有时候L也表示List例如LLEN</p>
+<p><img src="/images/pasted-420.png" alt="upload successful"></p>
+<pre class=" language-java"><code class="language-java"><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>LPUSH<span class="token operator">--</span><span class="token operator">-</span>RPUSH<span class="token operator">--</span><span class="token operator">-</span>LRANGE<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LPUSH mylist k1 # LPUSH mylist<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LPUSH mylist k2 # LPUSH mylist<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">}</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> RPUSH mylist k3 # RPUSH mylist<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> get mylist # 普通的get是无法获取list值的
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> WRONGTYPE Operation against a key holding the wrong kind of value
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token number">4</span> # LRANGE 获取起止位置范围内的元素
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k3"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token number">2</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k3"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span> # 获取全部元素
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k3"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>LPUSHX<span class="token operator">--</span><span class="token operator">-</span>RPUSHX<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LPUSHX list v1 # list不存在 LPUSHX失败
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LPUSHX list v1 <span class="token function">v2</span>  
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LPUSHX mylist k4 k5 # 向mylist中 左边 PUSH k4 <span class="token function">k5</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">5</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k5"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k4"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"k3"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>LINSERT<span class="token operator">--</span>LLEN<span class="token operator">--</span>LINDEX<span class="token operator">--</span>LSET<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LINSERT mylist after k2 ins_key1 # 在k2元素后 插入<span class="token function">ins_key1</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">6</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k5"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k4"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"ins_key1"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"k3"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LLEN mylist # 查看mylist的长度
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">6</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LINDEX mylist <span class="token number">3</span> # 获取下标为<span class="token number">3</span>的元素
+<span class="token string">"ins_key1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LINDEX mylist <span class="token number">0</span>
+<span class="token string">"k5"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LSET mylist <span class="token number">3</span> k6 # 将下标<span class="token number">3</span>的元素 set值为k6
+OK
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k5"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k4"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"k6"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"k3"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>LPOP<span class="token operator">--</span>RPOP<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LPOP mylist # 左侧<span class="token punctuation">(</span>头部<span class="token punctuation">)</span>弹出
+<span class="token string">"k5"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> RPOP mylist # 右侧<span class="token punctuation">(</span>尾部<span class="token punctuation">)</span>弹出
+<span class="token string">"k3"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>RPOPLPUSH<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k6"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> RPOPLPUSH mylist newlist # 将mylist的最后一个值<span class="token punctuation">(</span>k1<span class="token punctuation">)</span>弹出，加入到newlist的头部
+<span class="token string">"k1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE newlist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"k6"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>LTRIM<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LTRIM mylist <span class="token number">0</span> <span class="token number">1</span> # 截取mylist中的 <span class="token number">0</span><span class="token operator">~</span><span class="token number">1</span>部分
+OK
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LRANGE mylist <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"k4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+
+# 初始 mylist<span class="token operator">:</span> k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k4<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>LREM<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LREM mylist <span class="token number">3</span> k2 # 从头部开始搜索 至多删除<span class="token number">3</span>个 <span class="token function">k2</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
+# 删除后：mylist<span class="token operator">:</span> k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k4<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> LREM mylist <span class="token operator">-</span><span class="token number">2</span> k2 #从尾部开始搜索 至多删除<span class="token number">2</span>个 <span class="token function">k2</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+# 删除后：mylist<span class="token operator">:</span> k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k4<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2
+
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>BLPOP<span class="token operator">--</span>BRPOP<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+mylist<span class="token operator">:</span> k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k4<span class="token punctuation">,</span>k2<span class="token punctuation">,</span>k2
+newlist<span class="token operator">:</span> k1
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> BLPOP newlist mylist <span class="token number">30</span> # 从newlist中弹出第一个值，mylist作为候选
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"newlist"</span> # 弹出
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> BLPOP newlist mylist <span class="token number">30</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"mylist"</span> # 由于newlist空了 从mylist中弹出
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"k2"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> BLPOP newlist <span class="token function">30</span>
+<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">.</span>10s<span class="token punctuation">)</span> # 超时了
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> BLPOP newlist <span class="token number">30</span> # 我们连接另一个客户端向newlist中push了test<span class="token punctuation">,</span> 阻塞被解决。
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"newlist"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"test"</span>
+<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">.</span>54s<span class="token punctuation">)</span>
+</code></pre>
+<h6 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h6><ul>
+<li><p>list实际上是一个链表，before Node after , left, right 都可以插入值</p>
+</li>
+<li><p>如果key不存在，则创建新的链表</p>
+</li>
+<li><p>如果key存在，新增内容</p>
+</li>
+<li><p>如果移除了所有值，空链表，也代表不存在</p>
+</li>
+<li><p>在两边插入或者改动值，效率最高！修改中间元素，效率相对较低</p>
+</li>
+</ul>
+<p>应用：</p>
+<p><strong>消息排队！消息队列（Lpush Rpop）,栈（Lpush Lpop）</strong></p>
+<h4 id="set集合"><a href="#set集合" class="headerlink" title="set集合"></a>set集合</h4><p>**Redis的Set是string类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据。</p>
+<p>Redis 中 集合是<strong>通过哈希表实现的</strong>，所以添加，删除，查找的复杂度都是O(1)。</p>
+<p>集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)。</p>
+<p><img src="/images/pasted-421.png" alt="upload successful"></p>
+<pre class=" language-java"><code class="language-java">
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>SADD<span class="token operator">--</span>SCARD<span class="token operator">--</span>SMEMBERS<span class="token operator">--</span>SISMEMBER<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SADD myset m1 m2 m3 m4 # 向myset中增加成员 m1<span class="token operator">~</span><span class="token function">m4</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">4</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SCARD myset # 获取集合的成员数目
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">4</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> smembers myset # 获取集合中所有成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SISMEMBER myset m5 # 查询m5是否是myset的成员
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span> # 不是，返回<span class="token number">0</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SISMEMBER myset <span class="token function">m2</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span> # 是，返回<span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SISMEMBER myset <span class="token function">m3</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>SRANDMEMBER<span class="token operator">--</span>SPOP<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SRANDMEMBER myset <span class="token number">3</span> # 随机返回<span class="token number">3</span>个成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SRANDMEMBER myset # 随机返回<span class="token number">1</span>个成员
+<span class="token string">"m3"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SPOP myset <span class="token number">2</span> # 随机移除并返回<span class="token number">2</span>个成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+# 将set还原到<span class="token punctuation">{</span>m1<span class="token punctuation">,</span>m2<span class="token punctuation">,</span>m3<span class="token punctuation">,</span>m4<span class="token punctuation">}</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>SMOVE<span class="token operator">--</span>SREM<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SMOVE myset newset m3 # 将myset中m3成员移动到newset集合
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SMEMBERS myset
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SMEMBERS newset
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SREM newset m3 # 从newset中移除m3元素
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SMEMBERS <span class="token function">newset</span>
+<span class="token punctuation">(</span>empty list or set<span class="token punctuation">)</span>
+
+# 下面开始是多集合操作<span class="token punctuation">,</span>多集合操作中若只有一个参数默认和自身进行运算
+# setx<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>m1<span class="token punctuation">,</span>m2<span class="token punctuation">,</span>m4<span class="token punctuation">,</span>m6<span class="token punctuation">}</span><span class="token punctuation">,</span> sety<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>m2<span class="token punctuation">,</span>m5<span class="token punctuation">,</span>m6<span class="token punctuation">}</span><span class="token punctuation">,</span> setz<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>m1<span class="token punctuation">,</span>m3<span class="token punctuation">,</span>m6<span class="token punctuation">}</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>SDIFF<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SDIFF setx sety setz # 等价于setx<span class="token operator">-</span>sety<span class="token operator">-</span>setz
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SDIFF setx sety # setx <span class="token operator">-</span> sety
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SDIFF sety setx # sety <span class="token operator">-</span> setx
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m5"</span>
+
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>SINTER<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+# 共同关注（交集）
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SINTER setx sety setz # 求 setx、sety、setx的交集
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m6"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SINTER setx sety # 求setx sety的交集
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m6"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>SUNION<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SUNION setx sety setz # setx sety setz的并集
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m6"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"m5"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> SUNION setx sety # setx sety 并集
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m6"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"m5"</span>
+
+</code></pre>
+<h4 id="Hash-哈希"><a href="#Hash-哈希" class="headerlink" title="Hash(哈希)"></a>Hash(哈希)</h4><p>Redis hash 是一个string类型的field和value的映射表，<strong>hash特别适合用于存储对象。</strong></p>
+<p>Set就是一种简化的Hash,只变动key,而value使用默认值填充。可以将一个Hash表作为一个对象进行存储，表中存放对象的信息。</p>
+<p><img src="/images/pasted-422.png" alt="upload successful"></p>
+<pre class=" language-java"><code class="language-java"><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>HSET<span class="token operator">--</span>HMSET<span class="token operator">--</span>HSETNX<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HSET studentx name sakura # 将studentx哈希表作为一个对象，设置name为<span class="token function">sakura</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HSET studentx name gyc # 重复设置field进行覆盖，并返回<span class="token function">0</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HSET studentx age <span class="token number">20</span> # 设置studentx的age为<span class="token function">20</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HMSET studentx sex <span class="token number">1</span> tel <span class="token number">15623667886</span> # 设置sex为<span class="token number">1</span>，tel为<span class="token number">15623667886</span>
+OK
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HSETNX studentx name gyc # HSETNX 设置已存在的<span class="token function">field</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span> # 失败
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HSETNX studentx email <span class="token number">12345</span><span class="token annotation punctuation">@qq</span><span class="token punctuation">.</span><span class="token function">com</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span> # 成功
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>HEXISTS<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HEXISTS studentx name # name字段在studentx中是否存在
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span> # 存在
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HEXISTS studentx <span class="token function">addr</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span> # 不存在
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>HGET<span class="token operator">--</span>HMGET<span class="token operator">--</span>HGETALL<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HGET studentx name # 获取studentx中name字段的value
+<span class="token string">"gyc"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HMGET studentx name age tel # 获取studentx中name、age、tel字段的value
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"gyc"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"20"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"15623667886"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HGETALL studentx # 获取studentx中所有的field及其value
+ <span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"name"</span>
+ <span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"gyc"</span>
+ <span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"age"</span>
+ <span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"20"</span>
+ <span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"sex"</span>
+ <span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"1"</span>
+ <span class="token number">7</span><span class="token punctuation">)</span> <span class="token string">"tel"</span>
+ <span class="token number">8</span><span class="token punctuation">)</span> <span class="token string">"15623667886"</span>
+ <span class="token number">9</span><span class="token punctuation">)</span> <span class="token string">"email"</span>
+<span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">"12345@qq.com"</span>
+
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>HKEYS<span class="token operator">--</span>HLEN<span class="token operator">--</span>HVALS<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HKEYS studentx # 查看studentx中所有的field
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"name"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"age"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"sex"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"tel"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"email"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HLEN studentx # 查看studentx中的字段数量
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">5</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HVALS studentx # 查看studentx中所有的value
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"gyc"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"20"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"1"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"15623667886"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"12345@qq.com"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>HDEL<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HDEL studentx sex tel # 删除studentx 中的sex、tel字段
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HKEYS studentx
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"name"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"age"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"email"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>HINCRBY<span class="token operator">--</span>HINCRBYFLOAT<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HINCRBY studentx age <span class="token number">1</span> # studentx的age字段数值<span class="token operator">+</span><span class="token function">1</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">21</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HINCRBY studentx name <span class="token number">1</span> # 非整数字型字段不可用
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> ERR hash value is not an integer
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> HINCRBYFLOAT studentx weight <span class="token number">0.6</span> # weight字段增加<span class="token number">0.6</span>
+<span class="token string">"90.8"</span>
+
+</code></pre>
+<p> Hash变更的数据user name age，尤其是用户信息之类的，经常变动的信息！<strong>Hash更适合于对象的存储，Sring更加适合字符串存储！</strong></p>
+<h4 id="Zset-有序集合"><a href="#Zset-有序集合" class="headerlink" title="Zset(有序集合)"></a>Zset(有序集合)</h4><p>不同的是每个元素都会关联一个double类型的分数（score）。redis正是<strong>通过分数来为集合中的成员进行从小到大的排序。</strong></p>
+<p><strong>score相同：按字典顺序排序</strong></p>
+<p>有序集合的成员是唯一的,但分数(score)却可以重复。</p>
+<p><img src="/images/pasted-423.png" alt="upload successful"></p>
+<pre class=" language-java"><code class="language-java"><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>ZADD<span class="token operator">--</span>ZCARD<span class="token operator">--</span>ZCOUNT<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZADD myzset <span class="token number">1</span> m1 <span class="token number">2</span> m2 <span class="token number">3</span> m3 # 向有序集合myzset中添加成员m1 score<span class="token operator">=</span><span class="token number">1</span> 以及成员m2 score<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZCARD myzset # 获取有序集合的成员数
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZCOUNT myzset <span class="token number">0</span> <span class="token number">1</span> # 获取score在 <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span>区间的成员数量
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZCOUNT myzset <span class="token number">0</span> <span class="token function">2</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>ZINCRBY<span class="token operator">--</span>ZSCORE<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZINCRBY myzset <span class="token number">5</span> m2 # 将成员m2的score <span class="token operator">+</span><span class="token number">5</span>
+<span class="token string">"7"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZSCORE myzset m1 # 获取成员m1的score
+<span class="token string">"1"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZSCORE myzset m2
+<span class="token string">"7"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>ZRANK<span class="token operator">--</span>ZRANGE<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANK myzset m1 # 获取成员m1的索引，索引按照score排序，score相同索引值按字典顺序顺序增加
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">0</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANK myzset <span class="token function">m2</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGE myzset <span class="token number">0</span> <span class="token number">1</span> # 获取索引在 <span class="token number">0</span><span class="token operator">~</span><span class="token number">1</span>的成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGE myzset <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span> # 获取全部成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+
+#testset<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>abc<span class="token punctuation">,</span>add<span class="token punctuation">,</span>amaze<span class="token punctuation">,</span>apple<span class="token punctuation">,</span>back<span class="token punctuation">,</span>java<span class="token punctuation">,</span>redis<span class="token punctuation">}</span> score均为<span class="token number">0</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>ZRANGEBYLEX<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGEBYLEX testset <span class="token operator">-</span> <span class="token operator">+</span> # 返回所有成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"abc"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"add"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"amaze"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"apple"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"back"</span>
+<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"java"</span>
+<span class="token number">7</span><span class="token punctuation">)</span> <span class="token string">"redis"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGEBYLEX testset <span class="token operator">-</span> <span class="token operator">+</span> LIMIT <span class="token number">0</span> <span class="token number">3</span> # 分页 按索引显示查询结果的 <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span>条记录
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"abc"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"add"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"amaze"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGEBYLEX testset <span class="token operator">-</span> <span class="token operator">+</span> LIMIT <span class="token number">3</span> <span class="token number">3</span> # 显示 <span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span>条记录
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"apple"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"back"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"java"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGEBYLEX <span class="token function">testset</span> <span class="token punctuation">(</span><span class="token operator">-</span> <span class="token punctuation">[</span>apple # 显示 <span class="token punctuation">(</span><span class="token operator">-</span><span class="token punctuation">,</span>apple<span class="token punctuation">]</span> 区间内的成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"abc"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"add"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"amaze"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"apple"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGEBYLEX testset <span class="token punctuation">[</span>apple <span class="token punctuation">[</span>java # 显示 <span class="token punctuation">[</span>apple<span class="token punctuation">,</span>java<span class="token punctuation">]</span>字典区间的成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"apple"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"back"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"java"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>ZRANGEBYSCORE<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGEBYSCORE myzset <span class="token number">1</span> <span class="token number">10</span> # 返回score在 <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">]</span>之间的的成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGEBYSCORE myzset <span class="token number">1</span> <span class="token number">5</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m1"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>ZLEXCOUNT<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZLEXCOUNT testset <span class="token operator">-</span> <span class="token operator">+</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">7</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZLEXCOUNT testset <span class="token punctuation">[</span>apple <span class="token punctuation">[</span><span class="token function">java</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>ZREM<span class="token operator">--</span>ZREMRANGEBYLEX<span class="token operator">--</span>ZREMRANGBYRANK<span class="token operator">--</span>ZREMRANGEBYSCORE<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREM testset abc # 移除成员<span class="token function">abc</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREMRANGEBYLEX testset <span class="token punctuation">[</span>apple <span class="token punctuation">[</span>java # 移除字典区间<span class="token punctuation">[</span>apple<span class="token punctuation">,</span>java<span class="token punctuation">]</span>中的所有成员
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREMRANGEBYRANK testset <span class="token number">0</span> <span class="token number">1</span> # 移除排名<span class="token number">0</span><span class="token operator">~</span><span class="token number">1</span>的所有成员
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREMRANGEBYSCORE myzset <span class="token number">0</span> <span class="token number">3</span> # 移除score在 <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>的成员
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">2</span>
+
+
+# testset<span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>abc<span class="token punctuation">,</span>add<span class="token punctuation">,</span>apple<span class="token punctuation">,</span>amaze<span class="token punctuation">,</span>back<span class="token punctuation">,</span>java<span class="token punctuation">,</span>redis<span class="token punctuation">}</span> score均为<span class="token number">0</span>
+# myzset<span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span><span class="token punctuation">(</span>m1<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>m2<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>m3<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>m4<span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>m7<span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>m9<span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>ZREVRANGE<span class="token operator">--</span>ZREVRANGEBYSCORE<span class="token operator">--</span>ZREVRANGEBYLEX<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREVRANGE myzset <span class="token number">0</span> <span class="token number">3</span> # 按score递减排序，然后按索引，返回结果的 <span class="token number">0</span><span class="token operator">~</span><span class="token number">3</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m9"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m7"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREVRANGE myzset <span class="token number">2</span> <span class="token number">4</span> # 返回排序结果的 索引的<span class="token number">2</span><span class="token operator">~</span><span class="token number">4</span>
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREVRANGEBYSCORE myzset <span class="token number">6</span> <span class="token number">2</span> # 按score递减顺序 返回集合中分数在<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span>之间的成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"m4"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"m3"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"m2"</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREVRANGEBYLEX testset <span class="token punctuation">[</span><span class="token function">java</span> <span class="token punctuation">(</span>add # 按字典倒序 返回集合中<span class="token punctuation">(</span>add<span class="token punctuation">,</span>java<span class="token punctuation">]</span>字典区间的成员
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"java"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"back"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"apple"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"amaze"</span>
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>ZREVRANK<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREVRANK myzset m7 # 按score递减顺序，返回成员m7索引
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">1</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZREVRANK myzset <span class="token function">m2</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">4</span>
+
+
+# mathscore<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">(</span>xm<span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>xh<span class="token punctuation">,</span><span class="token number">95</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>xg<span class="token punctuation">,</span><span class="token number">87</span><span class="token punctuation">)</span><span class="token punctuation">}</span> 小明、小红、小刚的数学成绩
+# enscore<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">(</span>xm<span class="token punctuation">,</span><span class="token number">70</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>xh<span class="token punctuation">,</span><span class="token number">93</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>xg<span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">)</span><span class="token punctuation">}</span> 小明、小红、小刚的英语成绩
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>ZINTERSTORE<span class="token operator">--</span>ZUNIONSTORE<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZINTERSTORE sumscore <span class="token number">2</span> mathscore enscore # 将mathscore enscore进行合并 结果存放到<span class="token function">sumscore</span>
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGE sumscore <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span> withscores # 合并后的score是之前集合中所有score的和
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"xm"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"160"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"xg"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"177"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"xh"</span>
+<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"188"</span>
+
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZUNIONSTORE lowestscore <span class="token number">2</span> mathscore enscore AGGREGATE MIN # 取两个集合的成员score最小值作为结果的
+<span class="token punctuation">(</span>integer<span class="token punctuation">)</span> <span class="token number">3</span>
+<span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token operator">:</span><span class="token number">6379</span><span class="token operator">></span> ZRANGE lowestscore <span class="token number">0</span> <span class="token operator">-</span><span class="token number">1</span> withscores
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"xm"</span>
+<span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"70"</span>
+<span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">"xg"</span>
+<span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">"87"</span>
+<span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">"xh"</span>
+<span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">"93"</span>
+
+</code></pre>
+<p>应用案例：</p>
+<ul>
+<li>set排序 存储班级成绩表 工资表排序！</li>
+<li>普通消息，1.重要消息 2.带权重进行判断</li>
+<li>排行榜应用实现，取Top N测试</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://machuan.gitee.io" rel="external nofollow noreferrer">machuan</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://machuan.gitee.io/2020/10/22/Redis%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">https://machuan.gitee.io/2020/10/22/Redis%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://machuan.gitee.io" target="_blank">machuan</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/10/23/Redis%E4%B8%89%E5%A4%A7%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Redis三大特殊数据类型">
+                        
+                        <span class="card-title">Redis三大特殊数据类型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Geospatial(地理位置)使用经纬度定位地理坐标并用一个有序集合zset保存，所以zset命令也可以使用
+
+
+----------------georadius---------------------
+127.0.0.1:6379>
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-23
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Redis/" class="post-category">
+                                    Redis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/10/22/Redis%E5%85%A5%E9%97%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Redis入门">
+                        
+                        <span class="card-title">Redis入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            二、Redis入门概述Redis是什么？Redis（Remote Dictionary Server )，即远程字典服务。
+是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Redis/" class="post-category">
+                                    Redis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="https://machuan.gitee.io" target="_blank">machuan</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">220.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "6";
+                    var startDate = "1";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="fangmachuan.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2840334251@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2840334251" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2840334251" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
